@@ -4,7 +4,12 @@ function myEach(collection, callback) {
             callback(collection[i]);
         }
     } else {
-        Object.values(collection).forEach(item => callback(item));
+        // Object.values(collection).forEach(item => callback(item)); Oops, cheating!
+        let tempArray = Object.entries(collection);
+
+        for (let i = 0; i < tempArray.length; i++) {
+            callback(tempArray[i][1]);
+        }
     }
 
     return collection;
