@@ -151,28 +151,26 @@ function myFirst (collection, num) {
 // console.log('Num passed. Expect [5, 4, 3');
 // console.log(myFirst([5, 4, 3, 2, 1], 3));
 
+
 function myLast (collection, num) {
-    const newArray = [];
+    let tempArray = [];
+    let newArray = [];
     if (Array.isArray(collection)) {
-        if (num) {
-            for (let i = collection.length - 1; i >= num - 2; i--) {
-                newArray.push(collection[i]);
-            }
-        } else {
-            return collection[collection.length - 1];
-        }
+        tempArray = collection;
     } else {
-        const tempArray = [];
-        Object.values(collection).forEach(item => tempArray.push(item));
-        if (num) {
-            for (let i = tempArray.length - 1; i >= num - 2; i--) {
-                newArray.push(tempArray[i]);
-            }
-        } else {
-            return Object.values(collection[newArray.length - 1]);
+        for (const element in collection) {
+            Object.values(collection).forEach(item => tempArray.push(element))
         }
     }
-    return newArray.reverse();
+
+    if (num) {
+        for (let i = tempArray.length - 1; i >= num - 2; i--) {
+            newArray.push(tempArray[i]);
+        }
+        return newArray.reverse();
+    } else {
+        return tempArray[tempArray.length - 1];
+    }
 }
 
 // My Last tests
@@ -181,3 +179,27 @@ function myLast (collection, num) {
 
 // console.log('Num passed. Expect [2, 3, 4]');
 // console.log(myLast([1, 2, 3, 4], 3));
+
+function myKeys(collection) {
+    let newArray = [];
+    let tempArray = Object.entries(collection);
+
+    for (let i = 0; i < tempArray.length; i++) {
+        newArray.push(tempArray[i][0]);
+    }
+    return newArray;
+}
+
+//My Keys tests
+// console.log(`Expect ["one", "two", "three"]`);
+// console.log(myKeys({one: 1, two: 2, three: 3}));
+
+function myValues(collection) {
+    let newArray = [];
+    let tempArray = Object.entries(collection);
+
+    for (let i = 0; i < tempArray.length; i++) {
+        newArray.push(tempArray[i][1]);
+    }
+    return newArray;
+}
